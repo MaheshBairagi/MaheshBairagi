@@ -1,9 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ts.constants.Constants;
-import com.ts.domain.Signal;
-import com.ts.domain.SignalStatistics;
+
 
 public class Processor {
 
