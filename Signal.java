@@ -1,15 +1,28 @@
+import java.util.List;
+
+
 public class Signal {
 	
 	boolean greenSignal=false;
 	int greenTime=0;
 	int redTime=0;
 	String roadName=null;
+	List<Directions> directions;
 	
-	public Signal (int greenTime,int redTime,String name)
+	public Signal (int greenTime,int redTime,String name,List<Directions> directions)
 	{
 		this.greenTime=greenTime;
 		this.redTime=redTime;
 		this.roadName=name;
+		this.directions=directions;
+	}
+
+
+	/**
+	 * @return the directions
+	 */
+	public List<Directions> getDirections() {
+		return this.directions;
 	}
 
 
