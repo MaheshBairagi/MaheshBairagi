@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,8 +53,14 @@ public class Processor {
 		int east = 0;
 		int west = 0;
 	
-		Signal snellRoadSignal=new Signal(greenTime,redTime,Constants.SNELLROAD);
-		Signal weaverRoadSignal=new Signal(greenTime,redTime,Constants.WEAVERROAD);
+		List<Directions> firstDir=new ArrayList<Directions>();
+		firstDir.add(Directions.N);
+		firstDir.add(Directions.S);
+		List<Directions> secondDir=new ArrayList<Directions>();
+		secondDir.add(Directions.E);
+		secondDir.add(Directions.W);
+		Signal snellRoadSignal=new Signal(greenTime,redTime,Constants.SNELLROAD,firstDir);
+		Signal weaverRoadSignal=new Signal(greenTime,redTime,Constants.WEAVERROAD,secondDir);
 
 	
 		String startRoad = Constants.SNELLROAD;
@@ -86,9 +93,28 @@ public class Processor {
 
 			if (previous == "") {
 				if (snellRoadSignal.isGreenSignal()) {
-					east++;
-					west++;
-
+					
+					for(Directions s:weaverRoadSignal.getDirections())
+					{
+						switch (s)
+						{
+						case N:
+							north++;
+							break;
+						case S:
+							south++;
+							break;
+						case E:
+							east++;
+							break;
+						case W:
+							west++;
+							break;
+						}
+							
+						
+						
+					}
 					sgreen--;
 					if (sgreen == 0) {
 						snellRoadSignal.setGreenSignal(false);
@@ -97,8 +123,29 @@ public class Processor {
 					}
 
 				} else {
-					north++;
-					south++;
+					
+					for(Directions s:snellRoadSignal.getDirections())
+					{
+						switch (s)
+						{
+						case N:
+							north++;
+							break;
+						case S:
+							south++;
+							break;
+						case E:
+							east++;
+							break;
+						case W:
+							west++;
+							break;
+						}
+							
+						
+						
+					}
+					
 					wgreen--;
 					if (wgreen == 0) {
 						weaverRoadSignal.setGreenSignal(false);
@@ -114,8 +161,29 @@ public class Processor {
 
 				if (snellRoadSignal.isGreenSignal()) {
 					if (sgreen != greenTime) {
-						north--;
-						south--;
+						for(Directions s:snellRoadSignal.getDirections())
+						{
+							switch (s)
+							{
+							case N:
+								north--;
+								break;
+							case S:
+								south--;
+								break;
+							case E:
+								east--;
+								break;
+							case W:
+								west--;
+								break;
+							}
+								
+							
+							
+						}
+						
+						
 					}
 					sgreen--;
 					if (sgreen == 0) {
@@ -138,8 +206,27 @@ public class Processor {
 
 				if (weaverRoadSignal.isGreenSignal()) {
 					if (wgreen != greenTime) {
-						east--;
-						west--;
+						for(Directions s:weaverRoadSignal.getDirections())
+						{
+							switch (s)
+							{
+							case N:
+								north--;
+								break;
+							case S:
+								south--;
+								break;
+							case E:
+								east--;
+								break;
+							case W:
+								west--;
+								break;
+							}
+								
+							
+							
+						}
 					}
 					wgreen--;
 					if (wgreen == 0) {
